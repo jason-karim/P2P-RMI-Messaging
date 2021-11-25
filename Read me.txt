@@ -1,0 +1,3 @@
+to run the clients and the server on the same machine together you must start the rmi registry, start the client(client server) then start the UserList server, otherwise you will receive an error regarding the stub
+
+after starting the registry --> clients --> server, you may input the names into the clients and have them register with the server
