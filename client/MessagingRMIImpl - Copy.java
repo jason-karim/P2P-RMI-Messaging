@@ -17,7 +17,7 @@ public class MessagingRMIImpl extends UnicastRemoteObject implements MessagingRM
 	@Override
 	public boolean message(User peer,String message) throws RemoteException{
 		//receive message from a peer
-		System.out.println(peer.getName() + " : " + message);
+		PeerRMI.notifs.add(peer.getName());
 		
 		try {
 			//chat file path
