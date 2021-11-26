@@ -4,4 +4,6 @@ rmic MessagingRMIImpl
 
 start rmiregistry
 
-start java ClientRMI 127.0.0.1
+start java PeerRMI 127.0.0.1
+
+start java PeerRMI 127.0.0.1
