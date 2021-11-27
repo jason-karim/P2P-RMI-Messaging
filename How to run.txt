@@ -1,5 +1,7 @@
-Be sure to run the RMI registry in the peer directory if running peers and server on same machine.
+This project only works currently on the same machine, it doesn't work over a network due to firewalls.
+
+Be sure to run the RMI registry in the peer directory as it contains all the needed stubs and classes.
 
 run the server then run as many clients as needed.
 
-edit .bat file to specify server ip address if not on same machine (loopback)
+You may use the run.bat file to automatically run 3 peers and a server.
