@@ -1,3 +1,5 @@
 Chat logs will be written in this directory
 
+Chats can be read as text files normally, .chat extension is used to differentiate chat logs from normal text files
+
 DO NOT DELETE THIS DIRECTORY OR THE PEER WILL NOT WORK PROPERLY

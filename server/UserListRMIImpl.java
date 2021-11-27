@@ -1,6 +1,7 @@
 
 import java.rmi.*;
-import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class UserListRMIImpl extends UnicastRemoteObject implements UserListRMI{
 
-	//List of User Objects
+	//List of User objects
 	private List<User> userList = new ArrayList<User>();
 
 	public UserListRMIImpl(String name) throws RemoteException {
@@ -23,16 +24,17 @@ public class UserListRMIImpl extends UnicastRemoteObject implements UserListRMI{
 
 	@Override
 	public User[] returnOnlineUsers(User callingUser) throws RemoteException{
+		//create temporary list of users
 		List<User> users = new ArrayList<User>();
+		
+		//add all users but the one calling to temporary list
 		for(int i=0; i<userList.size() ; i++) {
-			//			System.out.println("comparing u1 and u2");
-			//			System.out.println("u1 " + userList.get(0).getName() + " " + userList.get(0).getObjName());
-			//			System.out.println("u2 " + callingUser.getName() + " " + callingUser.getObjName());
-			//			System.out.println(userList.get(i).compare(callingUser));
-			if(!userList.get(i).compare(callingUser)) {
+			if(!userList.get(i).equals(callingUser)) {
 				users.add(userList.get(i));
 			}
 		}
+		
+		//return array of online users excluding the user calling themselves
 		return (User[])users.toArray(new User[0]);
 	}
 
@@ -65,13 +67,12 @@ public class UserListRMIImpl extends UnicastRemoteObject implements UserListRMI{
 		//is not the same object that already is on the server, thus would not have a match in the list
 		//instead iterate over the list to find a matching user, then remove the matching user from the list
 		for(int i = 0; i<userList.size() ; i++) {
-			if(userList.get(i).compare(callingUser)) {
+			if(userList.get(i).equals(callingUser)) {
 				//remove matching user at index i
 				userList.remove(i);
 				return true;
 			}
 		}
 		return false;
-
 	}
 }

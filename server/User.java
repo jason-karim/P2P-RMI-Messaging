@@ -6,35 +6,37 @@ import java.util.Random;
 public class User implements Serializable {
 	
 	private String name;
-	private String objName;
+	private String remoteObjName;
 	private String host;
-	public String getName() {
-		return name;
-	}
-	public String getObjName() {
-		return objName;
-	}
-	public String getHost() {
-		return host;
-	}
+	
 	public User(String name) {
 		this.name = name;
-		this.objName = name + new Random().nextInt();
+		this.remoteObjName = name + new Random().nextInt();
 		try {
+			//set user's ip to machine's networking interface
 			this.host = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
 	}
-	public User(String name, String oName) {
+	
+	public String getName() {
+		return name;
+	}
+	public String getRemoteObjName() {
+		return remoteObjName;
+	}
+	public String getHost() {
+		return host;
+	}
+	public User(String name, String remoteObjName) {
 		this.name = name;
-		this.objName = oName;
+		this.remoteObjName = remoteObjName;
 	}
 	
-	public boolean compare(User u) {
-		//Compare User objects by there name an objName
-		//Add new properties of User objects to comparison if added
-		if(this.name.equals(u.name) && this.objName.equals(u.objName) && this.host.equals(u.host)) {return true;}
+	public boolean equals(User u) {
+		//Compare User objects by there name, objName and hostIP
+		if(this.name.equals(u.name) && this.remoteObjName.equals(u.remoteObjName) && this.host.equals(u.host)) {return true;}
 		else {return false;}
 	}
 

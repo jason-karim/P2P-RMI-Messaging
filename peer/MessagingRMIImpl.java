@@ -22,15 +22,14 @@ public class MessagingRMIImpl extends UnicastRemoteObject implements MessagingRM
 			PeerRMI.notifs.add(peer.getName());
 		}
 
-
-		if(PeerRMI.inChatWith.compare(peer)) {
-			//receive message from a peer
+		
+		if(PeerRMI.inChatWith.equals(peer)) {
+			//if in chat with peer who sent a message, print the message
 			System.out.println(peer.getName() + " : " + message);
 		}
-
 		try {
 			//chat file path
-			File f = new File(".\\chats\\"+PeerRMI.myUser.getObjName()+"&"+peer.getObjName()+".chat");
+			File f = new File(".\\chats\\"+PeerRMI.myUser.getRemoteObjName()+"&"+peer.getRemoteObjName()+".chat");
 			//create file if not existing already
 			f.createNewFile();
 			//write to file new message received
@@ -38,8 +37,8 @@ public class MessagingRMIImpl extends UnicastRemoteObject implements MessagingRM
 			myWriter.write(peer.getName() + " : " + message + "\n");
 			myWriter.close();
 		} catch (IOException e) {
-			System.out.println("An error occurred, message not sent.");
-			e.printStackTrace();
+			System.out.println("///error///An error occurred while receiving message, couldn't open chat log");
+			return false;
 		}
 		return true;
 	}
