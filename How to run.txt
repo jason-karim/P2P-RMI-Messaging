@@ -1,0 +1,5 @@
+Be sure to run the RMI registry in the peer directory if running peers and server on same machine.
+
+run the server then run as many clients as needed.
+
+edit .bat file to specify server ip address if not on same machine (loopback)

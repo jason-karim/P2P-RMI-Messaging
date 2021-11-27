@@ -1,0 +1,3 @@
+Chat logs will be written in this directory
+
+DO NOT DELETE THIS DIRECTORY OR THE PEER WILL NOT WORK PROPERLY
